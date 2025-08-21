@@ -1,0 +1,735 @@
+<!-- handbook.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Sport Science Handbook - Sport Science Network</title>
+  <meta name="description" content="The definitive resource for modern sports science practitioners. Featuring contributions from 20+ experts across strength and conditioning, sports science, and athletic training.">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --silver: #A3A6A8;
+      --dark-blue: #03202F;
+      --dark-red: #A71930;
+      --white: #FFFFFF;
+      --light-gray: #F5F5F5;
+      --text-gray: #333333;
+    }
+    body {
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      color: var(--text-gray);
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    nav {
+      background: var(--white);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--dark-blue);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .logo::before {
+      content: '';
+      width: 40px;
+      height: 40px;
+      background: var(--dark-red);
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-gray);
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+    .nav-links a:hover {
+      color: var(--dark-red);
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--dark-red);
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .mobile-toggle span {
+      width: 25px;
+      height: 3px;
+      background: var(--dark-blue);
+      transition: all 0.3s ease;
+    }
+
+    /* Page Header */
+    .page-header {
+      background: var(--dark-blue);
+      color: var(--white);
+      padding: 8rem 2rem 4rem;
+      text-align: center;
+    }
+    .page-header h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .page-header p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+
+    /* Book Section */
+    .book-section {
+      padding: 4rem 2rem;
+      background: var(--white);
+    }
+    .book-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .book-image {
+      text-align: center;
+      position: sticky;
+      top: 6rem;
+    }
+    .book-cover {
+      width: 100%;
+      max-width: 300px;
+      height: 420px;
+      background: var(--dark-blue);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    .book-info h2 {
+      font-size: 2rem;
+      color: var(--dark-blue);
+      margin-bottom: 1.5rem;
+    }
+    .book-info h3 {
+      font-size: 1.5rem;
+      color: var(--dark-blue);
+      margin: 2rem 0 1rem;
+    }
+    .book-features {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+    .book-features li {
+      padding: 0.5rem 0;
+      padding-left: 2rem;
+      position: relative;
+    }
+    .book-features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--dark-red);
+      font-weight: bold;
+    }
+    .buy-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 2rem 0;
+    }
+    .buy-button {
+      background: var(--dark-red);
+      color: var(--white);
+      padding: 1rem 2rem;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .buy-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      opacity: 0.9;
+    }
+
+    /* Table of Contents */
+    .toc-section {
+      background: var(--light-gray);
+      padding: 3rem 2rem;
+      margin: 2rem 0;
+      border-radius: 10px;
+    }
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+    .toc-column h4 {
+      color: var(--dark-red);
+      margin-bottom: 1rem;
+    }
+    .toc-column ul {
+      list-style: none;
+    }
+    .toc-column li {
+      padding: 0.3rem 0;
+      color: var(--text-gray);
+    }
+
+    /* Contributors Section */
+    .contributors-section {
+      padding: 4rem 2rem;
+      background: var(--light-gray);
+    }
+    .contributors-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .contributors-container h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      color: var(--dark-blue);
+      margin-bottom: 1rem;
+    }
+    .contributors-subtitle {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 3rem;
+      color: var(--silver);
+    }
+    .contributors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .contributor-card {
+      background: var(--white);
+      padding: 2rem;
+      border-radius: 10px;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+    .contributor-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--dark-red);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    .contributor-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: var(--dark-blue);
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+    .contributor-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: var(--dark-blue);
+    }
+    .contributor-card .role {
+      color: var(--silver);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+    .contributor-card .bio {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--text-gray);
+    }
+
+    /* Reviews Section */
+    .reviews-section {
+      padding: 4rem 2rem;
+      background: var(--white);
+    }
+    .reviews-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .reviews-container h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      color: var(--dark-blue);
+      margin-bottom: 3rem;
+    }
+    .review-card {
+      background: var(--light-gray);
+      padding: 2rem;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    .review-card::before {
+      content: '"';
+      font-size: 4rem;
+      color: var(--dark-red);
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      opacity: 0.3;
+    }
+    .review-text {
+      font-style: italic;
+      margin-bottom: 1rem;
+      line-height: 1.8;
+    }
+    .review-author {
+      font-weight: bold;
+      color: var(--dark-blue);
+    }
+    .review-role {
+      color: var(--silver);
+      font-size: 0.9rem;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: var(--dark-red);
+      color: var(--white);
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    .cta-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .cta-container h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .cta-container p {
+      margin-bottom: 2rem;
+      opacity: 0.95;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--text-gray);
+      color: var(--white);
+      padding: 3rem 2rem 2rem;
+      text-align: center;
+    }
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: var(--white);
+      text-decoration: none;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+    }
+    .footer-links a:hover {
+      opacity: 1;
+    }
+    .footer-contact {
+      margin-bottom: 2rem;
+    }
+    .footer-contact h3 {
+      margin-bottom: 1rem;
+      color: var(--white);
+    }
+    .footer-contact a {
+      color: var(--white);
+      text-decoration: none;
+      opacity: 0.8;
+    }
+    .footer-contact a:hover {
+      opacity: 1;
+    }
+    .copyright {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      opacity: 0.7;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--white);
+        flex-direction: column;
+        padding: 1rem;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .mobile-toggle {
+        display: flex;
+      }
+      .page-header h1 {
+        font-size: 2rem;
+      }
+      .book-container {
+        grid-template-columns: 1fr;
+      }
+      .book-image {
+        position: static;
+        margin-bottom: 2rem;
+      }
+      .buy-buttons {
+        flex-direction: column;
+      }
+      .contributors-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="logo">Sport Science Network</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="handbook.html" class="active">Handbook</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="network.html">Network</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="mobile-toggle">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <h1>The Sport Science Handbook</h1>
+    <p>
+      The definitive resource for modern sports science practitioners. This
+      comprehensive guide brings together expertise from leading professionals
+      across strength and conditioning, rehabilitation, sports science, and athletic training.
+    </p>
+  </header>
+
+  <!-- Book Section -->
+  <section class="book-section">
+    <div class="book-container">
+      <div class="book-image">
+        <div class="book-cover">
+          <div>
+            <h3>The Sport Science Handbook</h3>
+            <p style="font-size: 1rem; margin-top: 1rem;">A Comprehensive Guide for Modern Practitioners</p>
+          </div>
+        </div>
+      </div>
+      <div class="book-info">
+        <h2>About The Handbook</h2>
+        <p>
+          Years of collective experience distilled into one comprehensive resource.
+          The Sport Science Handbook represents a collaborative effort from over 20
+          industry experts who share a common goal: making sports science more
+          accessible and practical for everyday application.
+        </p>
+        
+        <h3>Key Features</h3>
+        <ul class="book-features">
+          <li>Over 300 pages of practical, evidence-based content</li>
+          <li>Visual guides and infographics for quick reference</li>
+          <li>Contributions from 20+ industry experts</li>
+          <li>Cross-discipline perspectives and integration</li>
+          <li>Real-world case studies and applications</li>
+          <li>Practical tools and templates you can use immediately</li>
+          <li>Clear explanations without unnecessary jargon</li>
+          <li>Actionable insights for immediate implementation</li>
+        </ul>
+
+        <div class="buy-buttons">
+          <a href="https://www.amazon.com/dp/your-ebook-id" class="buy-button" target="_blank">Buy eBook - $29.99</a>
+          <a href="https://www.amazon.com/dp/your-paperback-id" class="buy-button" target="_blank">Buy Paperback - $49.99</a>
+        </div>
+
+        <div class="toc-section">
+          <h3>Table of Contents</h3>
+          <div class="toc-grid">
+            <div class="toc-column">
+              <h4>Part I: Foundations</h4>
+              <ul>
+                <li>1. Modern Sports Science Practice</li>
+                <li>2. Evidence-Based Decision Making</li>
+                <li>3. Athlete-Centered Approach</li>
+                <li>4. Interdisciplinary Collaboration</li>
+              </ul>
+            </div>
+            <div class="toc-column">
+              <h4>Part II: Assessment & Monitoring</h4>
+              <ul>
+                <li>5. Movement Assessment Protocols</li>
+                <li>6. Performance Testing Standards</li>
+                <li>7. Load Monitoring Systems</li>
+                <li>8. Data Collection & Analysis</li>
+              </ul>
+            </div>
+            <div class="toc-column">
+              <h4>Part III: Training & Development</h4>
+              <ul>
+                <li>9. Strength Training Methodology</li>
+                <li>10. Speed & Power Development</li>
+                <li>11. Energy System Training</li>
+                <li>12. Recovery & Regeneration</li>
+              </ul>
+            </div>
+            <div class="toc-column">
+              <h4>Part IV: Special Considerations</h4>
+              <ul>
+                <li>13. Injury Prevention Strategies</li>
+                <li>14. Return to Play Protocols</li>
+                <li>15. Nutrition & Supplementation</li>
+                <li>16. Mental Performance</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contributors Section -->
+  <section class="contributors-section">
+    <div class="contributors-container">
+      <h2>Meet The Contributors</h2>
+      <p class="contributors-subtitle">
+        The Sport Science Handbook was made possible by the expertise and dedication
+        of these industry leaders who contributed their knowledge and experience.
+      </p>
+      <div class="contributors-grid">
+        <div class="contributor-card">
+          <div class="contributor-avatar">JD</div>
+          <h3>Dr. Jane Doe</h3>
+          <p class="role">Strength & Conditioning Coach</p>
+          <p class="bio">
+            Over 15 years of experience working with elite athletes. PhD in Exercise Science
+            and certified strength and conditioning specialist.
+          </p>
+        </div>
+        <div class="contributor-card">
+          <div class="contributor-avatar">MS</div>
+          <h3>Mike Smith</h3>
+          <p class="role">Sports Scientist</p>
+          <p class="bio">
+            Leading sports scientist specializing in performance analytics. Has worked with
+            professional teams in the NBA and NFL.
+          </p>
+        </div>
+        <div class="contributor-card">
+          <div class="contributor-avatar">SC</div>
+          <h3>Sarah Chen</h3>
+          <p class="role">Athletic Trainer</p>
+          <p class="bio">
+            Certified athletic trainer with expertise in injury prevention. Works with
+            Olympic athletes and professional sports teams.
+          </p>
+        </div>
+        <div class="contributor-card">
+          <div class="contributor-avatar">RJ</div>
+          <h3>Robert Johnson</h3>
+          <p class="role">Rehabilitation Specialist</p>
+          <p class="bio">
+            Physical therapist focusing on return-to-play protocols. Pioneer of several
+            innovative rehabilitation techniques.
+          </p>
+        </div>
+        <div class="contributor-card">
+          <div class="contributor-avatar">AM</div>
+          <h3>Dr. Alex Martinez</h3>
+          <p class="role">Biomechanics Expert</p>
+          <p class="bio">
+            Renowned biomechanist with 50+ peer-reviewed papers. Expert in movement
+            analysis and injury mechanics.
+          </p>
+        </div>
+        <div class="contributor-card">
+          <div class="contributor-avatar">KW</div>
+          <h3>Kelly Williams</h3>
+          <p class="role">Nutrition Specialist</p>
+          <p class="bio">
+            Registered dietitian specializing in sports nutrition. Works with professional
+            athletes across various sports.
+          </p>
+        </div>
+        <div class="contributor-card">
+          <div class="contributor-avatar">TB</div>
+          <h3>Dr. Thomas Brown</h3>
+          <p class="role">Exercise Physiologist</p>
+          <p class="bio">
+            Exercise physiologist with expertise in endurance performance. Consults with
+            national teams and professional athletes.
+          </p>
+        </div>
+        <div class="contributor-card">
+          <div class="contributor-avatar">LP</div>
+          <h3>Lisa Park</h3>
+          <p class="role">Performance Analyst</p>
+          <p class="bio">
+            Pioneer in sports data analytics. Developed proprietary analysis systems
+            used by elite teams worldwide.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews Section -->
+  <section class="reviews-section">
+    <div class="reviews-container">
+      <h2>What Readers Are Saying</h2>
+      <div class="review-card">
+        <p class="review-text">
+          "This handbook is exactly what our field needed. It bridges the gap between
+          research and practice in a way that's both accessible and comprehensive.
+          A must-have for any serious practitioner."
+        </p>
+        <p class="review-author">Dr. Michael Thompson</p>
+        <p class="review-role">Head of Performance, Professional Soccer Club</p>
+      </div>
+      <div class="review-card">
+        <p class="review-text">
+          "Finally, a resource that speaks our language. The practical examples and
+          clear explanations make complex concepts immediately applicable. This has
+          become my go-to reference."
+        </p>
+        <p class="review-author">Jennifer Martinez</p>
+        <p class="review-role">NCAA Division I Strength Coach</p>
+      </div>
+      <div class="review-card">
+        <p class="review-text">
+          "The collaborative approach of this handbook sets it apart. Having perspectives
+          from multiple disciplines in one resource has transformed how I approach
+          athlete development."
+        </p>
+        <p class="review-author">David Lee</p>
+        <p class="review-role">Sports Science Coordinator, Olympic Training Center</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="cta-container">
+      <h2>Ready to Elevate Your Practice?</h2>
+      <p>
+        Join thousands of practitioners who are using The Sport Science Handbook
+        to improve their coaching and athlete outcomes.
+      </p>
+      <div class="buy-buttons" style="justify-content: center;">
+        <a href="https://www.amazon.com/dp/your-ebook-id" class="buy-button" target="_blank" style="background: var(--white); color: var(--dark-red);">Get Your Copy Today</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="handbook.html">Handbook</a>
+        <a href="about.html">About</a>
+        <a href="resources.html">Resources</a>
+        <a href="network.html">Network</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-contact">
+        <h3>Get in Touch</h3>
+        <p>
+          <a href="mailto:info@sportsciencenetwork.com">info@sportsciencenetwork.com</a>
+        </p>
+      </div>
+      <p class="copyright">© 2025 Sport Science Network. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile navigation toggle
+    const mobileToggle = document.querySelector('.mobile-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    mobileToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('nav')) {
+        navLinks.classList.remove('active');
+      }
+    });
+  </script>
+
+</body>
+</html>

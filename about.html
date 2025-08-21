@@ -1,0 +1,673 @@
+<!-- about.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us - Sport Science Network</title>
+  <meta name="description" content="Learn about Sport Science Network's mission to bridge the gap between sports science research and practical application. Meet our team of experienced professionals.">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --silver: #A3A6A8;
+      --dark-blue: #03202F;
+      --dark-red: #A71930;
+      --white: #FFFFFF;
+      --light-gray: #F5F5F5;
+      --text-gray: #333333;
+    }
+    body {
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      color: var(--text-gray);
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    nav {
+      background: var(--white);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--dark-blue);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .logo::before {
+      content: '';
+      width: 40px;
+      height: 40px;
+      background: var(--dark-red);
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-gray);
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+    .nav-links a:hover {
+      color: var(--dark-red);
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--dark-red);
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .mobile-toggle span {
+      width: 25px;
+      height: 3px;
+      background: var(--dark-blue);
+      transition: all 0.3s ease;
+    }
+
+    /* Page Header */
+    .page-header {
+      background: var(--dark-blue);
+      color: var(--white);
+      padding: 8rem 2rem 4rem;
+      text-align: center;
+    }
+    .page-header h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .page-header p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+
+    /* Story Section */
+    .story-section {
+      padding: 4rem 2rem;
+      background: var(--white);
+    }
+    .story-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .story-container h2 {
+      font-size: 2rem;
+      color: var(--dark-blue);
+      margin-bottom: 1.5rem;
+    }
+    .story-container p {
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+    }
+    .highlight-box {
+      background: var(--light-gray);
+      padding: 2rem;
+      border-left: 4px solid var(--dark-red);
+      margin: 2rem 0;
+    }
+    .highlight-box h3 {
+      color: var(--dark-blue);
+      margin-bottom: 1rem;
+    }
+    .highlight-box ul {
+      padding-left: 1.5rem;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Mission Values Section */
+    .mission-values {
+      padding: 4rem 2rem;
+      background: var(--light-gray);
+    }
+    .mission-values-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .mission-values h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      color: var(--dark-blue);
+      margin-bottom: 3rem;
+    }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .value-card {
+      background: var(--white);
+      padding: 2rem;
+      border-radius: 10px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .value-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    .value-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .value-card h3 {
+      color: var(--dark-red);
+      margin-bottom: 1rem;
+    }
+    .value-card p {
+      color: var(--text-gray);
+      line-height: 1.6;
+    }
+
+    /* Team Section */
+    .team-section {
+      padding: 4rem 2rem;
+      background: var(--white);
+    }
+    .team-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .team-container h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      color: var(--dark-blue);
+      margin-bottom: 1rem;
+    }
+    .team-subtitle {
+      text-align: center;
+      color: var(--silver);
+      margin-bottom: 3rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 3rem;
+    }
+    .team-member {
+      background: var(--light-gray);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .team-member:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+    .member-photo {
+      width: 100%;
+      height: 250px;
+      background: var(--dark-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 4rem;
+      font-weight: bold;
+    }
+    .member-info {
+      padding: 2rem;
+    }
+    .member-info h3 {
+      font-size: 1.5rem;
+      color: var(--dark-blue);
+      margin-bottom: 0.5rem;
+    }
+    .member-role {
+      color: var(--dark-red);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .member-bio {
+      color: var(--text-gray);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .member-credentials {
+      font-size: 0.9rem;
+      color: var(--silver);
+      font-style: italic;
+    }
+
+    /* Why Clarity Section */
+    .clarity-section {
+      padding: 4rem 2rem;
+      background: var(--dark-blue);
+      color: var(--white);
+    }
+    .clarity-container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .clarity-container h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+    }
+    .clarity-container p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      opacity: 0.95;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 4rem 2rem;
+      background: var(--white);
+      text-align: center;
+    }
+    .cta-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .cta-container h2 {
+      font-size: 2rem;
+      color: var(--dark-blue);
+      margin-bottom: 1rem;
+    }
+    .cta-container p {
+      margin-bottom: 2rem;
+      color: var(--text-gray);
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .cta-button {
+      padding: 1rem 2rem;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    .cta-primary {
+      background: var(--dark-red);
+      color: var(--white);
+    }
+    .cta-secondary {
+      background: var(--dark-blue);
+      color: var(--white);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--text-gray);
+      color: var(--white);
+      padding: 3rem 2rem 2rem;
+      text-align: center;
+    }
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: var(--white);
+      text-decoration: none;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+    }
+    .footer-links a:hover {
+      opacity: 1;
+    }
+    .footer-contact {
+      margin-bottom: 2rem;
+    }
+    .footer-contact h3 {
+      margin-bottom: 1rem;
+      color: var(--white);
+    }
+    .footer-contact a {
+      color: var(--white);
+      text-decoration: none;
+      opacity: 0.8;
+    }
+    .footer-contact a:hover {
+      opacity: 1;
+    }
+    .copyright {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      opacity: 0.7;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--white);
+        flex-direction: column;
+        padding: 1rem;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .mobile-toggle {
+        display: flex;
+      }
+      .page-header h1 {
+        font-size: 2rem;
+      }
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+      .values-grid {
+        grid-template-columns: 1fr;
+      }
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="logo">Sport Science Network</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="handbook.html">Handbook</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="network.html">Network</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="mobile-toggle">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <h1>About Sport Science Network</h1>
+    <p>
+      We're on a mission to bridge the gap between sports science research and
+      practical application, making cutting-edge knowledge accessible to every coach and practitioner.
+    </p>
+  </header>
+
+  <!-- Our Story Section -->
+  <section class="story-section">
+    <div class="story-container">
+      <h2>Our Story</h2>
+      <p>
+        Sport Science Network was founded with a simple yet powerful vision: to bridge the gap
+        between sports science research and practical application. We recognized that while
+        incredible research was being conducted in labs and universities around the world,
+        much of it wasn't reaching the coaches, trainers, and practitioners who could
+        benefit most from these insights.
+      </p>
+      <p>
+        Our journey began when a group of experienced professionals from different disciplines
+        came together with a shared frustration. We'd all seen the same problem from different
+        angles: groundbreaking research gathering dust in academic journals while coaches
+        struggled with outdated methods. We knew there had to be a better way.
+      </p>
+      <p>
+        That's when we decided to create Sport Science Network—a platform that would translate
+        complex science into actionable strategies. We believe that the best outcomes in sports
+        performance come from combining rigorous scientific understanding with practical
+        coaching wisdom.
+      </p>
+
+      <div class="highlight-box">
+        <h3>Our Founding Principle</h3>
+        <p>
+          "Science should serve practice, not intimidate it. Every coach deserves access
+          to the latest research, presented in a way they can immediately apply."
+        </p>
+      </div>
+
+      <p>
+        What started as informal discussions between colleagues has grown into a movement.
+        Today, Sport Science Network serves thousands of practitioners worldwide, providing
+        resources, fostering community, and continuously working to elevate the standards
+        of sports science practice.
+      </p>
+    </div>
+  </section>
+
+  <!-- Mission & Values Section -->
+  <section class="mission-values">
+    <div class="mission-values-container">
+      <h2>Mission & Values</h2>
+      
+      <div class="highlight-box" style="background: var(--white); margin-bottom: 3rem;">
+        <h3>Our Mission</h3>
+        <p>The mission of The Sport Science Network is to connect everyone invested in sport—from grassroots coaches to experienced practitioners—by making sport science clearer, more actionable, and more impactful for athletes at all levels.</p>
+        <ul>
+          <li>Science to practice.</li>
+          <li>Information to better decisions.</li>
+          <li>Knowledge to action.</li>
+          <li>People to people.</li>
+          <li>You to practical solutions.</li>
+        </ul>
+        <p>Continue your sport science journey with additional resources, connections, and practical guidance.</p>
+        
+        <h3 style="margin-top: 2rem;">Our Vision</h3>
+        <p>To be the leading global hub for sport science innovation, education, and community—where practitioners, coaches, researchers, and students come together to shape the future of human performance.</p>
+      </div>
+
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">💡</div>
+          <h3>Clarity</h3>
+          <p>We make complex science accessible and actionable. No unnecessary jargon, just clear communication that empowers better decisions.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🤝</div>
+          <h3>Community</h3>
+          <p>We believe in the power of shared knowledge and collaboration. Together, we're stronger and smarter.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">⭐</div>
+          <h3>Excellence</h3>
+          <p>We maintain the highest standards in our content and resources, ensuring everything we share is accurate and valuable.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🚀</div>
+          <h3>Innovation</h3>
+          <p>We stay at the forefront of sports science developments, constantly evolving our approach and resources.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">✓</div>
+          <h3>Integrity</h3>
+          <p>We present honest, evidence-based information without bias, always prioritizing truth over trends.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <div class="team-container">
+      <h2>Meet The Team</h2>
+      <p class="team-subtitle">
+        The passionate professionals behind Sport Science Network, dedicated to making
+        sports science more accessible and practical for everyone.
+      </p>
+      
+      <div class="team-grid">
+        <div class="team-member">
+          <div class="member-photo">ML</div>
+          <div class="member-info">
+            <h3>Marc Lewis</h3>
+            <p class="member-role">Co-Founder & CEO</p>
+            <div class="member-bio">
+              <p>Marc Lewis is an applied performance and sport scientist with a variety of experiences within collegiate and professional sporting environments. He has held roles that oversee the collection, management, and analysis of data to inform decision-making to maximize player performance and availability. He specializes in developing and implementing systems in stressful and time restricted environments with outcomes focused on enhancing player performance and reducing the likelihood of injury. </p>
+              
+              <p>He completed his PhD in exercise physiology and metabolism from Virginia Tech, while creating a plan of study supporting multidisciplinary training and course work in a range of areas. He focused his research on athletic performance and recovery, and completed his dissertation entitled “Athlete Monitoring in American Football” while working full-time in athletics as the director of sport science and assistant director of strength and conditioning for the Virginia Tech football team. </p>
+
+              <p>He completed his undergraduate degree in health and exercise science from Wake Forest University, while completing his honors research under the direction of Dr. Michael Berry. While completing his undergraduate and graduate education, he held research positions while serving in athletics as a strength and conditioning and sports performance intern and applied sports science fellow. He is a certified performance and sport scientist and certified strength and conditioning specialist with distinction through the National Strength and Conditioning Association, as well as a level 1 weightlifting coach through the United States Weightlifting Association.</p>
+            </div>
+            <p class="member-credentials">
+              PhD in Sports Science • CSCS • Former D1 Athletic Performance Director
+            </p>
+          </div>
+        </div>
+
+        <div class="team-member">
+          <div class="member-photo">SR</div>
+          <div class="member-info">
+            <h3>Dr. Sarah Richardson</h3>
+            <p class="member-role">Co-Founder & Chief Science Officer</p>
+            <p class="member-bio">
+              Sarah ensures all our content maintains the highest scientific standards while
+              remaining practical and accessible. She leads our research translation efforts
+              and oversees content development.
+            </p>
+            <p class="member-credentials">
+              PhD in Exercise Physiology • Published Researcher • 15+ Years in Applied Sports Science
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Clarity Matters Section -->
+  <section class="clarity-section">
+    <div class="clarity-container">
+      <h2>Why Clarity Matters</h2>
+      <p>
+        In the world of sports science, clarity isn't just about simplification—it's
+        about translation. We take peer-reviewed research, complex biomechanical
+        concepts, and cutting-edge training methodologies and present them in ways
+        that coaches can immediately apply in their practice.
+      </p>
+      <p>
+        This clarity empowers better decision-making, improved athlete outcomes, and
+        advances the entire field of sports performance. When knowledge is accessible,
+        everyone benefits—from the weekend warrior to the Olympic athlete.
+      </p>
+      <p>
+        We believe that the best science is useless if it can't be understood and
+        applied. That's why every resource we create, every article we publish, and
+        every tool we develop is designed with one goal: making you a better practitioner.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="cta-container">
+      <h2>Join Us in Our Mission</h2>
+      <p>
+        Whether you're a coach, trainer, therapist, or sports scientist,
+        you're part of our community. Let's elevate the field together.
+      </p>
+      <div class="cta-buttons">
+        <a href="network.html" class="cta-button cta-primary">Join Our Network</a>
+        <a href="contact.html" class="cta-button cta-secondary">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="handbook.html">Handbook</a>
+        <a href="about.html">About</a>
+        <a href="resources.html">Resources</a>
+        <a href="network.html">Network</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-contact">
+        <h3>Get in Touch</h3>
+        <p>
+          <a href="mailto:info@sportsciencenetwork.com">info@sportsciencenetwork.com</a>
+        </p>
+      </div>
+      <p class="copyright">© 2025 Sport Science Network. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile navigation toggle
+    const mobileToggle = document.querySelector('.mobile-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    mobileToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('nav')) {
+        navLinks.classList.remove('active');
+      }
+    });
+  </script>
+
+</body>
+</html>

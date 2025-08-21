@@ -1,0 +1,595 @@
+<!-- contact.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us - Sport Science Network</title>
+  <meta name="description" content="Get in touch with Sport Science Network. We'd love to hear from you about partnerships, resources, or any questions you might have.">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --silver: #A3A6A8;
+      --dark-blue: #03202F;
+      --dark-red: #A71930;
+      --white: #FFFFFF;
+      --light-gray: #F5F5F5;
+      --text-gray: #333333;
+    }
+    body {
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      color: var(--text-gray);
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    nav {
+      background: var(--white);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--dark-blue);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .logo::before {
+      content: '';
+      width: 40px;
+      height: 40px;
+      background: var(--dark-red);
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-gray);
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+    .nav-links a:hover {
+      color: var(--dark-red);
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--dark-red);
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .mobile-toggle span {
+      width: 25px;
+      height: 3px;
+      background: var(--dark-blue);
+      transition: all 0.3s ease;
+    }
+
+    /* Page Header */
+    .page-header {
+      background: var(--dark-blue);
+      color: var(--white);
+      padding: 8rem 2rem 4rem;
+      text-align: center;
+    }
+    .page-header h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .page-header p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+
+    /* Contact Section */
+    .contact-section {
+      padding: 4rem 2rem;
+      background: var(--white);
+    }
+    .contact-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 4rem;
+    }
+
+    /* Contact Info */
+    .contact-info {
+      background: var(--light-gray);
+      padding: 3rem;
+      border-radius: 10px;
+    }
+    .contact-info h2 {
+      font-size: 1rem;
+      color: var(--dark-blue);
+      margin-bottom: 2rem;
+    }
+    .info-item {
+      margin-bottom: 2rem;
+    }
+    .info-item h3 {
+      color: var(--dark-red);
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+    .info-item p {
+      color: var(--text-gray);
+      line-height: 1.6;
+    }
+    .faq-item a, .info-item a {
+      color: var(--dark-blue);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .info-item a:hover {
+      color: var(--dark-red);
+    }
+
+    /* Contact Form */
+    .contact-form-container {
+      background: var(--white);
+    }
+    .contact-form-container h2 {
+      font-size: 2rem;
+      color: var(--dark-blue);
+      margin-bottom: 1rem;
+    }
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+    .form-group label {
+      font-weight: 600;
+      color: var(--dark-blue);
+      margin-bottom: 0.5rem;
+    }
+    .required {
+      color: var(--dark-red);
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%!important;
+      padding: 0.8rem 1rem!important;
+      border: 2px solid #e0e0e0;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: all 0.3s ease;
+      text-indent: unset!important;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--dark-red);
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 150px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .submit-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    .form-note {
+      font-size: 0.9rem;
+      color: var(--silver);
+      margin-top: 1rem;
+    }
+
+    /* Response Time Section */
+    .response-section {
+      padding: 3rem 2rem;
+      background: var(--light-gray);
+      text-align: center;
+    }
+    .response-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .response-container h2 {
+      color: var(--dark-blue);
+      margin-bottom: 1rem;
+    }
+    .response-container p {
+      color: var(--text-gray);
+      line-height: 1.6;
+    }
+    #mc_embed_signup form {
+      margin: 0!important;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      padding: 4rem 2rem;
+      background: var(--white);
+    }
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .faq-container h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      color: var(--dark-blue);
+      margin-bottom: 3rem;
+    }
+    .faq-item {
+      margin-bottom: 2rem;
+      background: var(--light-gray);
+      padding: 2rem;
+      border-radius: 10px;
+    }
+    .faq-item h3 {
+      color: var(--dark-red);
+      margin-bottom: 1rem;
+    }
+    .faq-item p {
+      color: var(--text-gray);
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--text-gray);
+      color: var(--white);
+      padding: 3rem 2rem 2rem;
+      text-align: center;
+    }
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: var(--white);
+      text-decoration: none;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+    }
+    .footer-links a:hover {
+      opacity: 1;
+    }
+    .footer-contact {
+      margin-bottom: 2rem;
+    }
+    .footer-contact h3 {
+      margin-bottom: 1rem;
+      color: var(--white);
+    }
+    .footer-contact a {
+      color: var(--white);
+      text-decoration: none;
+      opacity: 0.8;
+    }
+    .footer-contact a:hover {
+      opacity: 1;
+    }
+    .copyright {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      opacity: 0.7;
+    }
+
+    /* Success Message */
+    #mc_embed_signup div#mce-responses {
+      padding: 0!important;
+      width: unset !important;
+      margin: 0!important;
+    }
+
+    .success-message {
+      display: none;
+      background: #4CAF50;
+      color: white!important;
+      padding: 1rem;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+    }
+    #mc_embed_signup .button {
+      background-color: var(--dark-red)!important;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--white);
+        flex-direction: column;
+        padding: 1rem;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .mobile-toggle {
+        display: flex;
+      }
+      .page-header h1 {
+        font-size: 2rem;
+      }
+      .contact-container {
+        grid-template-columns: 1fr;
+      }
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="logo">Sport Science Network</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="handbook.html">Handbook</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="network.html">Network</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+      <button class="mobile-toggle">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <h1>Get in Touch</h1>
+    <p>
+      Have questions, ideas, or want to collaborate? We'd love to hear from you.
+      Fill out the form below and we'll get back to you within 48 hours.
+    </p>
+  </header>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <div class="contact-container">
+      
+      <!-- Contact Info -->
+      <div class="contact-info">
+        <h2>Contact Information</h2>
+        
+        <div class="info-item">
+          <h3>Email</h3>
+          <p><a href="mailto:info@sportsciencenetwork.com">info@sportsciencenetwork.com</a></p>
+        </div>
+        
+        <div class="info-item">
+          <h3>For Contributors</h3>
+          <p>
+            Interested in contributing articles or resources?<br>
+            <a href="contact.html">Contact</a>
+            <a href="mailto:contribute@sportsciencenetwork.com">contribute@sportsciencenetwork.com</a>
+          </p>
+        </div>
+        
+        <div class="info-item">
+          <h3>For Partnerships</h3>
+          <p>
+            Looking to partner or collaborate?<br>
+            <a href="mailto:partnerships@sportsciencenetwork.com">partnerships@sportsciencenetwork.com</a>
+          </p>
+        </div>
+        
+        <div class="info-item">
+          <h3>Response Time</h3>
+          <p>
+            We typically respond to all inquiries within 48 hours during
+            business days. For urgent matters, please indicate so in your
+            subject line.
+          </p>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact-form-container">
+        <h2>Send Us a Message</h2>
+        <div id="mc_embed_shell">
+      
+        <div id="mc_embed_signup">
+            <form action="https://sportsciencenetwork.us11.list-manage.com/subscribe/post?u=7eea25ef6d2ac2bed03e03c8c&amp;id=44aa10d1fa&amp;f_id=008214e1f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+                <div id="mc_embed_signup_scroll">
+                    <div class="mc-field-group form-group"><label for="mce-NAME">Name <span class="asterisk">*</span></label><input type="text" name="NAME" class=" text" id="mce-NAME" required="" value=""></div>
+                    <div class="mc-field-group form-group"><label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label><input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required="" value=""></div>
+                    <div class="mc-field-group form-group"><label for="mce-COMPANY">Company </label><input type="text" name="COMPANY" class=" text" id="mce-COMPANY" value=""></div>
+                    <div class="mc-field-group form-group"><label for="mce-SUBJECT">Subject <span class="asterisk">*</span></label>
+                      <select name="SUBJECT" class="required" required=""  id="mce-SUBJECT">
+                        <option value=""></option>
+                        <option value="General Inquiry">General Inquiry</option>
+                        <option value="Partnership Opportunities">Partnership Opportunities</option>
+                        <option value="Media/Press Request">Media/Press Request</option>
+                        <option value="Technical Support">Technical Support</option>
+                        <option value="Resource Submission">Resource Submission</option>
+                        <option value="Speaking Engagement">Speaking Engagement</option>
+                        <option value="Handbook Questions">Handbook Questions</option>
+                        <option value="Network Membership">Network Membership</option>
+                        <option value="Report an Issue">Report an Issue</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                    <div class="mc-field-group form-group"><label for="mce-MESSAGE">Message <span class="asterisk">*</span></label><textarea name="MESSAGE" class="required text" required="" id="mce-MESSAGE" value=""></textarea></div>
+                    <div id="mce-responses" >
+                        <div class="response" id="mce-error-response" style="display: none;"></div>
+                        <div class="success-message" id="mce-success-response" style="display: none;"></div>
+                    </div>
+                    <div aria-hidden="true" style="position: absolute; left: -5000px;">
+                        <input type="text" name="b_7eea25ef6d2ac2bed03e03c8c_44aa10d1fa" tabindex="-1" value="">
+                    </div>
+                    <div class="optionalParent">
+                        <div class="clear foot">
+                            <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Send Message">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- Response Time Section -->
+  <section class="response-section">
+    <div class="response-container">
+      <h2>What Happens Next?</h2>
+      <p>
+        Once you submit your message, our team will review it and get back to you
+        within 48 hours. For partnership inquiries or media requests, we may schedule
+        a follow-up call to discuss your needs in detail.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <div class="faq-container">
+      <h2>Frequently Asked Questions</h2>
+      
+      <div class="faq-item">
+        <h3>How can I contribute to Sport Science Network?</h3>
+        <p>
+          We're always looking for quality contributions from practitioners. You can
+          submit articles, share tools and templates, or propose educational content.
+          Email us at <a href="mailto:contribute@sportsciencenetwork.com">contribute@sportsciencenetwork.com</a> with your ideas.
+        </p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>Do you offer consulting services?</h3>
+        <p>
+          While Sport Science Network focuses on education and community building,
+          our team members do provide consulting services independently. Contact us
+          to discuss your specific needs and we can connect you with the right expert.
+        </p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>How do I report a technical issue?</h3>
+        <p>
+          If you're experiencing technical difficulties with our website or resources,
+          please use the contact form above and select "Technical Support" as your
+          subject. Include as much detail as possible about the issue.
+        </p>
+      </div>
+      
+      <div class="faq-item">
+        <h3>Can I request specific resources or topics?</h3>
+        <p>
+          Absolutely! We value community input and regularly create content based on
+          member requests. Use the contact form to share what resources or topics
+          you'd like to see covered.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="handbook.html">Handbook</a>
+        <a href="about.html">About</a>
+        <a href="resources.html">Resources</a>
+        <a href="network.html">Network</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-contact">
+        <h3>Get in Touch</h3>
+        <p>
+          <a href="mailto:info@sportsciencenetwork.com">info@sportsciencenetwork.com</a>
+        </p>
+      </div>
+      <p class="copyright">© 2025 Sport Science Network. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile navigation toggle
+    const mobileToggle = document.querySelector('.mobile-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    mobileToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('nav')) {
+        navLinks.classList.remove('active');
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script><script type="text/javascript">(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[1]='NAME';ftypes[1]='text';fnames[0]='EMAIL';ftypes[0]='email';fnames[6]='COMPANY';ftypes[6]='text';fnames[2]='SUBJECT';ftypes[2]='dropdown';fnames[3]='MESSAGE';ftypes[3]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script></div>
+</body>
+</html>

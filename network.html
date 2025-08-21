@@ -1,0 +1,777 @@
+<!-- network.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Network - Sport Science Network</title>
+  <meta name="description" content="Join our community of sports science professionals. Access exclusive events, connect with peers, and advance your career.">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --silver: #A3A6A8;
+      --dark-blue: #03202F;
+      --dark-red: #A71930;
+      --white: #FFFFFF;
+      --light-gray: #F5F5F5;
+      --text-gray: #333333;
+    }
+    body {
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      color: var(--text-gray);
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    nav {
+      background: var(--white);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--dark-blue);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .logo::before {
+      content: '';
+      width: 40px;
+      height: 40px;
+      background: var(--dark-red);
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-gray);
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+    .nav-links a:hover {
+      color: var(--dark-red);
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--dark-red);
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .mobile-toggle span {
+      width: 25px;
+      height: 3px;
+      background: var(--dark-blue);
+      transition: all 0.3s ease;
+    }
+
+    /* Page Header */
+    .page-header {
+      background: var(--dark-blue);
+      color: var(--white);
+      padding: 8rem 2rem 4rem;
+      text-align: center;
+    }
+    .page-header h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .page-header p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+
+    /* Community Stats */
+    .stats-section {
+      padding: 4rem 2rem;
+      background: var(--white);
+    }
+    .stats-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    .stat-card {
+      padding: 2rem;
+      background: var(--light-gray);
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    .stat-number {
+      font-size: 3rem;
+      color: var(--dark-red);
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    .stat-label {
+      color: var(--silver);
+      font-size: 1.1rem;
+    }
+
+    /* Membership Section */
+    .membership-section {
+      padding: 4rem 2rem;
+      background: var(--light-gray);
+    }
+    .membership-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .membership-container h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      color: var(--dark-blue);
+      margin-bottom: 3rem;
+    }
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    .benefit-card {
+      background: var(--white);
+      padding: 2rem;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+    .benefit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    .benefit-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .benefit-card h3 {
+      color: var(--dark-blue);
+      margin-bottom: 1rem;
+    }
+    .benefit-card p {
+      color: var(--text-gray);
+      line-height: 1.6;
+    }
+    .membership-cta {
+      text-align: center;
+      margin-top: 3rem;
+    }
+    .membership-cta h3 {
+      font-size: 1.5rem;
+      color: var(--dark-blue);
+      margin-bottom: 1rem;
+    }
+    .membership-price {
+      font-size: 3rem;
+      color: var(--dark-red);
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    .membership-period {
+      color: var(--silver);
+      margin-bottom: 2rem;
+    }
+    .join-button {
+      display: inline-block;
+      background: var(--dark-red);
+      color: var(--white);
+      padding: 1.2rem 3rem;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+    .join-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    /* Events Section */
+    .events-section {
+      padding: 4rem 2rem;
+      background: var(--white);
+    }
+    .events-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .events-container h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      color: var(--dark-blue);
+      margin-bottom: 1rem;
+    }
+    .events-subtitle {
+      text-align: center;
+      color: var(--silver);
+      margin-bottom: 3rem;
+    }
+    .events-grid {
+      display: grid;
+      gap: 2rem;
+    }
+    .event-card {
+      background: var(--light-gray);
+      border-radius: 10px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      transition: all 0.3s ease;
+    }
+    .event-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+    .event-date {
+      background: var(--dark-red);
+      color: var(--white);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .event-month {
+      font-size: 1rem;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .event-day {
+      font-size: 2.5rem;
+      font-weight: bold;
+      line-height: 1;
+    }
+    .event-year {
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+    .event-info {
+      padding: 2rem;
+    }
+    .event-type {
+      display: inline-block;
+      background: var(--dark-blue);
+      color: var(--white);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      margin-bottom: 1rem;
+    }
+    .event-info h3 {
+      color: var(--dark-blue);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .event-details {
+      color: var(--text-gray);
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    .event-meta {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--silver);
+      font-size: 0.9rem;
+    }
+    .event-register {
+      display: inline-block;
+      color: var(--dark-red);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    .event-register:hover {
+      color: var(--dark-blue);
+    }
+
+    /* Community Section */
+    .community-section {
+      padding: 4rem 2rem;
+      background: var(--dark-blue);
+      color: var(--white);
+    }
+    .community-container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .community-container h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+    }
+    .community-container p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      opacity: 0.95;
+    }
+    .community-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .community-feature {
+      text-align: center;
+    }
+    .community-feature h3 {
+      margin-bottom: 1rem;
+      color: var(--white);
+    }
+    .community-feature p {
+      opacity: 0.9;
+      font-size: 1rem;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--text-gray);
+      color: var(--white);
+      padding: 3rem 2rem 2rem;
+      text-align: center;
+    }
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: var(--white);
+      text-decoration: none;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+    }
+    .footer-links a:hover {
+      opacity: 1;
+    }
+    .footer-contact {
+      margin-bottom: 2rem;
+    }
+    .footer-contact h3 {
+      margin-bottom: 1rem;
+      color: var(--white);
+    }
+    .footer-contact a {
+      color: var(--white);
+      text-decoration: none;
+      opacity: 0.8;
+    }
+    .footer-contact a:hover {
+      opacity: 1;
+    }
+    .copyright {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      opacity: 0.7;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--white);
+        flex-direction: column;
+        padding: 1rem;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .mobile-toggle {
+        display: flex;
+      }
+      .page-header h1 {
+        font-size: 2rem;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      .event-card {
+        grid-template-columns: 1fr;
+      }
+      .event-date {
+        padding: 1.5rem;
+        flex-direction: row;
+        gap: 1rem;
+      }
+      .community-features {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="logo">Sport Science Network</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="handbook.html">Handbook</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="network.html" class="active">Network</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="mobile-toggle">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <h1>The Network</h1>
+    <p>
+      Join our community of sports science professionals. Connect with peers,
+      access exclusive events, and be part of a movement that's elevating the
+      entire field of sports performance.
+    </p>
+  </header>
+
+  <!-- Community Stats -->
+  <section class="stats-section">
+    <div class="stats-container">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">500+</div>
+          <div class="stat-label">Active Members</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">25+</div>
+          <div class="stat-label">Countries Represented</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">150+</div>
+          <div class="stat-label">Resources Shared</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">40+</div>
+          <div class="stat-label">Events Annually</div>
+        </div>
+      </div>
+      <p style="font-size: 1.1rem; color: var(--silver);">
+        A growing community of professionals dedicated to advancing sports science through collaboration
+      </p>
+    </div>
+  </section>
+
+  <!-- Membership Benefits -->
+  <section class="membership-section">
+    <div class="membership-container">
+      <h2>Membership Benefits</h2>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">🎯</div>
+          <h3>Exclusive Resources</h3>
+          <p>
+            Access member-only tools, templates, and research summaries
+            updated monthly to keep you at the cutting edge.
+          </p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🎓</div>
+          <h3>Monthly Webinars</h3>
+          <p>
+            Learn from industry experts in our monthly educational webinars
+            covering the latest in sports science and performance.
+          </p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🤝</div>
+          <h3>Peer Connections</h3>
+          <p>
+            Connect with like-minded professionals through our member
+            directory and regional meetup groups.
+          </p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">💬</div>
+          <h3>Private Forums</h3>
+          <p>
+            Engage in meaningful discussions, ask questions, and share
+            experiences in our moderated member forums.
+          </p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🎟️</div>
+          <h3>Event Discounts</h3>
+          <p>
+            Receive exclusive discounts on all Sport Science Network
+            events, workshops, and certification programs.
+          </p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">📚</div>
+          <h3>Early Access</h3>
+          <p>
+            Be the first to access new resources, tools, and content
+            before they're released to the public.
+          </p>
+        </div>
+      </div>
+      
+      <div class="membership-cta">
+        <h3>Ready to Join?</h3>
+        <div class="membership-price">$99</div>
+        <div class="membership-period">per year</div>
+        <a href="#" class="join-button">Become a Member</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Upcoming Events -->
+  <section class="events-section">
+    <div class="events-container">
+      <h2>Upcoming Events</h2>
+      <p class="events-subtitle">
+        From virtual workshops to in-person conferences, we bring the community together
+        to learn, share, and advance the field.
+      </p>
+      
+      <div class="events-grid">
+        
+        <div class="event-card">
+          <div class="event-date">
+            <div class="event-month">JUN</div>
+            <div class="event-day">15</div>
+            <div class="event-year">2025</div>
+          </div>
+          <div class="event-info">
+            <span class="event-type">Virtual Summit</span>
+            <h3>Monthly Virtual Summit: Technology in Sports Performance</h3>
+            <p class="event-details">
+              Join us for our monthly virtual summit where practitioners share insights
+              on integrating technology into sports performance programs. This month's
+              focus: wearable technology and data interpretation.
+            </p>
+            <div class="event-meta">
+              <span class="meta-item">⏰ 2:00 PM EST</span>
+              <span class="meta-item">👥 Members Only</span>
+              <span class="meta-item">💻 Virtual Event</span>
+            </div>
+            <a href="#" class="event-register">Register Now →</a>
+          </div>
+        </div>
+
+        <div class="event-card">
+          <div class="event-date">
+            <div class="event-month">JUL</div>
+            <div class="event-day">10</div>
+            <div class="event-year">2025</div>
+          </div>
+          <div class="event-info">
+            <span class="event-type">Webinar</span>
+            <h3>Practical Applications of Velocity-Based Training</h3>
+            <p class="event-details">
+              Deep-dive webinar on implementing VBT in your programs. Learn device
+              selection, data interpretation, and programming strategies from
+              experts who've successfully integrated VBT across multiple sports.
+            </p>
+            <div class="event-meta">
+              <span class="meta-item">⏰ 12:00 PM EST</span>
+              <span class="meta-item">🎓 2 CEUs Available</span>
+              <span class="meta-item">💻 Virtual Event</span>
+            </div>
+            <a href="#" class="event-register">Register Now →</a>
+          </div>
+        </div>
+
+        <div class="event-card">
+          <div class="event-date">
+            <div class="event-month">AUG</div>
+            <div class="event-day">22-24</div>
+            <div class="event-year">2025</div>
+          </div>
+          <div class="event-info">
+            <span class="event-type">Annual Conference</span>
+            <h3>Sport Science Network Annual Conference 2025</h3>
+            <p class="event-details">
+              Our flagship event bringing together 300+ practitioners for three days
+              of learning, networking, and advancement. Featuring keynote speakers,
+              hands-on workshops, and the latest in sports science research.
+            </p>
+            <div class="event-meta">
+              <span class="meta-item">📍 Denver, CO</span>
+              <span class="meta-item">🎓 15 CEUs Available</span>
+              <span class="meta-item">🎟️ Early Bird Pricing</span>
+            </div>
+            <a href="#" class="event-register">Learn More →</a>
+          </div>
+        </div>
+
+        <div class="event-card">
+          <div class="event-date">
+            <div class="event-month">SEP</div>
+            <div class="event-day">5</div>
+            <div class="event-year">2025</div>
+          </div>
+          <div class="event-info">
+            <span class="event-type">Workshop</span>
+            <h3>Regional Workshop: Movement Assessment Mastery</h3>
+            <p class="event-details">
+              Hands-on workshop focusing on functional movement assessment techniques.
+              Limited to 30 participants for maximum interaction and personalized
+              feedback from our expert instructors.
+            </p>
+            <div class="event-meta">
+              <span class="meta-item">📍 Los Angeles, CA</span>
+              <span class="meta-item">👥 30 Spots</span>
+              <span class="meta-item">🎓 8 CEUs Available</span>
+            </div>
+            <a href="#" class="event-register">Register Now →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Community Features -->
+  <section class="community-section">
+    <div class="community-container">
+      <h2>More Than Just Membership</h2>
+      <p>
+        When you join Sport Science Network, you're not just getting access to resources—
+        you're becoming part of a movement. A community that believes in the power of
+        shared knowledge and collective advancement.
+      </p>
+      
+      <div class="community-features">
+        <div class="community-feature">
+          <h3>Mentorship Program</h3>
+          <p>
+            Connect with experienced professionals who can guide your career
+            development and provide valuable insights.
+          </p>
+        </div>
+        <div class="community-feature">
+          <h3>Research Collaborations</h3>
+          <p>
+            Find partners for research projects and contribute to advancing
+            the field through collaborative studies.
+          </p>
+        </div>
+        <div class="community-feature">
+          <h3>Job Board</h3>
+          <p>
+            Exclusive access to career opportunities from organizations that
+            value evidence-based practice.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="handbook.html">Handbook</a>
+        <a href="about.html">About</a>
+        <a href="resources.html">Resources</a>
+        <a href="network.html">Network</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-contact">
+        <h3>Get in Touch</h3>
+        <p>
+          <a href="mailto:info@sportsciencenetwork.com">info@sportsciencenetwork.com</a>
+        </p>
+      </div>
+      <p class="copyright">© 2025 Sport Science Network. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile navigation toggle
+    const mobileToggle = document.querySelector('.mobile-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    mobileToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('nav')) {
+        navLinks.classList.remove('active');
+      }
+    });
+  </script>
+
+</body>
+</html>

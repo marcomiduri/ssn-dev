@@ -1,0 +1,782 @@
+<!-- resources.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resources - Sport Science Network</title>
+  <meta name="description" content="Explore our curated collection of articles, videos, tools, and templates designed to enhance your sports science practice.">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --silver: #A3A6A8;
+      --dark-blue: #03202F;
+      --dark-red: #A71930;
+      --white: #FFFFFF;
+      --light-gray: #F5F5F5;
+      --text-gray: #333333;
+    }
+    body {
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      color: var(--text-gray);
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    nav {
+      background: var(--white);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--dark-blue);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .logo::before {
+      content: '';
+      width: 40px;
+      height: 40px;
+      background: var(--dark-red);
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-gray);
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+    .nav-links a:hover {
+      color: var(--dark-red);
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--dark-red);
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .mobile-toggle span {
+      width: 25px;
+      height: 3px;
+      background: var(--dark-blue);
+      transition: all 0.3s ease;
+    }
+
+    /* Page Header */
+    .page-header {
+      background: var(--dark-blue);
+      color: var(--white);
+      padding: 8rem 2rem 4rem;
+      text-align: center;
+    }
+    .page-header h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .page-header p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+
+    /* Filter Section */
+    .filter-section {
+      padding: 2rem;
+      background: var(--light-gray);
+      position: sticky;
+      top: 70px;
+      z-index: 100;
+    }
+    .filter-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+    .filter-label {
+      font-weight: 600;
+      color: var(--dark-blue);
+    }
+    .filter-button {
+      background: var(--white);
+      border: 2px solid transparent;
+      padding: 0.5rem 1.5rem;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+    .filter-button:hover {
+      border-color: var(--dark-red);
+    }
+    .filter-button.active {
+      background: var(--dark-red);
+      color: var(--white);
+      border-color: var(--dark-red);
+    }
+
+    /* Resources Grid */
+    .resources-section {
+      padding: 4rem 2rem;
+      background: var(--white);
+    }
+    .resources-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+    .resource-card {
+      background: var(--white);
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .resource-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+    .resource-header {
+      padding: 1.5rem;
+      background: var(--light-gray);
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .resource-type {
+      display: inline-block;
+      background: var(--dark-red);
+      color: var(--white);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .resource-card h3 {
+      color: var(--dark-blue);
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+    .resource-date {
+      color: var(--silver);
+      font-size: 0.9rem;
+    }
+    .resource-body {
+      padding: 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .resource-description {
+      color: var(--text-gray);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+    .resource-meta {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      color: var(--silver);
+      font-size: 0.9rem;
+    }
+    .resource-link {
+      color: var(--dark-blue);
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.3s ease;
+    }
+    .resource-link:hover {
+      color: var(--dark-red);
+    }
+
+    /* Featured Resources */
+    .featured-section {
+      padding: 4rem 2rem;
+      background: var(--light-gray);
+    }
+    .featured-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .featured-container h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      color: var(--dark-blue);
+      margin-bottom: 3rem;
+    }
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .featured-card {
+      background: var(--white);
+      padding: 2rem;
+      border-radius: 10px;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+    .featured-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--dark-red);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    .featured-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .featured-card h3 {
+      color: var(--dark-blue);
+      margin-bottom: 1rem;
+    }
+    .featured-card p {
+      color: var(--text-gray);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    .featured-link {
+      display: inline-block;
+      background: var(--dark-red);
+      color: var(--white);
+      padding: 0.8rem 1.5rem;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .featured-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 4rem 2rem;
+      background: var(--dark-red);
+      color: var(--white);
+      text-align: center;
+    }
+    .cta-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .cta-container h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .cta-container p {
+      margin-bottom: 2rem;
+      opacity: 0.95;
+    }
+    .cta-button {
+      display: inline-block;
+      background: var(--white);
+      color: var(--dark-red);
+      padding: 1rem 2rem;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--text-gray);
+      color: var(--white);
+      padding: 3rem 2rem 2rem;
+      text-align: center;
+    }
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: var(--white);
+      text-decoration: none;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+    }
+    .footer-links a:hover {
+      opacity: 1;
+    }
+    .footer-contact {
+      margin-bottom: 2rem;
+    }
+    .footer-contact h3 {
+      margin-bottom: 1rem;
+      color: var(--white);
+    }
+    .footer-contact a {
+      color: var(--white);
+      text-decoration: none;
+      opacity: 0.8;
+    }
+    .footer-contact a:hover {
+      opacity: 1;
+    }
+    .copyright {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      opacity: 0.7;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--white);
+        flex-direction: column;
+        padding: 1rem;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .mobile-toggle {
+        display: flex;
+      }
+      .page-header h1 {
+        font-size: 2rem;
+      }
+      .resources-grid {
+        grid-template-columns: 1fr;
+      }
+      .featured-grid {
+        grid-template-columns: 1fr;
+      }
+      .filter-container {
+        justify-content: flex-start;
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="logo">Sport Science Network</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="handbook.html">Handbook</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="resources.html" class="active">Resources</a></li>
+        <li><a href="network.html">Network</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="mobile-toggle">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <h1>Resources</h1>
+    <p>
+      Explore our curated collection of articles, videos, tools, and templates
+      designed to enhance your practice and keep you at the forefront of sports science.
+    </p>
+  </header>
+
+  <!-- Filter Section -->
+  <section class="filter-section">
+    <div class="filter-container">
+      <span class="filter-label">Filter by:</span>
+      <button class="filter-button active" data-filter="all">All Resources</button>
+      <button class="filter-button" data-filter="article">Articles</button>
+      <button class="filter-button" data-filter="video">Videos</button>
+      <button class="filter-button" data-filter="tool">Tools</button>
+      <button class="filter-button" data-filter="template">Templates</button>
+      <button class="filter-button" data-filter="guide">Guides</button>
+    </div>
+  </section>
+
+  <!-- Featured Resources -->
+  <section class="featured-section">
+    <div class="featured-container">
+      <h2>Featured Resources</h2>
+      <div class="featured-grid">
+        <div class="featured-card">
+          <div class="featured-icon">📊</div>
+          <h3>Load Management Calculator</h3>
+          <p>
+            Our most popular tool. Track and manage training loads across your
+            entire team with this comprehensive Excel template.
+          </p>
+          <a href="#" class="featured-link">Download Tool</a>
+        </div>
+        <div class="featured-card">
+          <div class="featured-icon">🎥</div>
+          <h3>Movement Assessment Series</h3>
+          <p>
+            Complete video guide covering fundamental movement assessments
+            every practitioner should master.
+          </p>
+          <a href="#" class="featured-link">Watch Series</a>
+        </div>
+        <div class="featured-card">
+          <div class="featured-icon">📖</div>
+          <h3>Periodization Guide</h3>
+          <p>
+            Comprehensive guide to implementing effective periodization
+            strategies for different sports and athletes.
+          </p>
+          <a href="#" class="featured-link">Read Guide</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resources Grid -->
+  <section class="resources-section">
+    <div class="resources-container">
+      <div class="resources-grid">
+        
+        <!-- Article -->
+        <div class="resource-card" data-type="article">
+          <div class="resource-header">
+            <span class="resource-type">Article</span>
+            <h3>Understanding Force-Velocity Profiling</h3>
+            <span class="resource-date">March 15, 2025</span>
+          </div>
+          <div class="resource-body">
+            <p class="resource-description">
+              A comprehensive guide to implementing force-velocity profiling in your
+              training programs. Learn how to assess, interpret, and apply F-V data
+              to optimize athlete performance.
+            </p>
+            <div class="resource-meta">
+              <span class="meta-item">📖 15 min read</span>
+              <span class="meta-item">👤 Dr. Sarah Richardson</span>
+            </div>
+            <a href="#" class="resource-link">Read Article →</a>
+          </div>
+        </div>
+
+        <!-- Video -->
+        <div class="resource-card" data-type="video">
+          <div class="resource-header">
+            <span class="resource-type">Video</span>
+            <h3>Plyometric Progression Series</h3>
+            <span class="resource-date">March 10, 2025</span>
+          </div>
+          <div class="resource-body">
+            <p class="resource-description">
+              Step-by-step video guide for implementing safe and effective
+              plyometric progressions. Perfect for coaches working with
+              developing athletes.
+            </p>
+            <div class="resource-meta">
+              <span class="meta-item">🎥 45 min</span>
+              <span class="meta-item">👤 Marcus Chen</span>
+            </div>
+            <a href="#" class="resource-link">Watch Video →</a>
+          </div>
+        </div>
+
+        <!-- Tool -->
+        <div class="resource-card" data-type="tool">
+          <div class="resource-header">
+            <span class="resource-type">Tool</span>
+            <h3>Sprint Profile Calculator</h3>
+            <span class="resource-date">March 5, 2025</span>
+          </div>
+          <div class="resource-body">
+            <p class="resource-description">
+              Excel-based tool for calculating sprint mechanical properties.
+              Includes automated analysis and visualization of split times
+              and acceleration profiles.
+            </p>
+            <div class="resource-meta">
+              <span class="meta-item">📊 Excel Tool</span>
+              <span class="meta-item">💾 2.5 MB</span>
+            </div>
+            <a href="#" class="resource-link">Download Tool →</a>
+          </div>
+        </div>
+
+        <!-- Template -->
+        <div class="resource-card" data-type="template">
+          <div class="resource-header">
+            <span class="resource-type">Template</span>
+            <h3>Annual Training Plan Template</h3>
+            <span class="resource-date">February 28, 2025</span>
+          </div>
+          <div class="resource-body">
+            <p class="resource-description">
+              Customizable template for creating comprehensive annual training
+              plans. Includes macrocycle, mesocycle, and microcycle planning
+              sheets with automatic calculations.
+            </p>
+            <div class="resource-meta">
+              <span class="meta-item">📄 Template</span>
+              <span class="meta-item">💾 1.8 MB</span>
+            </div>
+            <a href="#" class="resource-link">Download Template →</a>
+          </div>
+        </div>
+
+        <!-- Guide -->
+        <div class="resource-card" data-type="guide">
+          <div class="resource-header">
+            <span class="resource-type">Guide</span>
+            <h3>Recovery Protocols for Team Sports</h3>
+            <span class="resource-date">February 20, 2025</span>
+          </div>
+          <div class="resource-body">
+            <p class="resource-description">
+              Evidence-based recovery strategies for high-performance team
+              sport athletes. Includes protocols for in-season, post-game,
+              and off-season recovery management.
+            </p>
+            <div class="resource-meta">
+              <span class="meta-item">📖 25 min read</span>
+              <span class="meta-item">👤 John Harrison</span>
+            </div>
+            <a href="#" class="resource-link">Read Guide →</a>
+          </div>
+        </div>
+
+        <!-- Article -->
+        <div class="resource-card" data-type="article">
+          <div class="resource-header">
+            <span class="resource-type">Article</span>
+            <h3>Velocity-Based Training: Practical Applications</h3>
+            <span class="resource-date">February 15, 2025</span>
+          </div>
+          <div class="resource-body">
+            <p class="resource-description">
+              Learn how to implement velocity-based training in your programs.
+              Covers device selection, data interpretation, and programming
+              considerations for different athlete populations.
+            </p>
+            <div class="resource-meta">
+              <span class="meta-item">📖 20 min read</span>
+              <span class="meta-item">👤 Mike Smith</span>
+            </div>
+            <a href="#" class="resource-link">Read Article →</a>
+          </div>
+        </div>
+
+        <!-- Video -->
+        <div class="resource-card" data-type="video">
+          <div class="resource-header">
+            <span class="resource-type">Video</span>
+            <h3>Olympic Lifting Technique Analysis</h3>
+            <span class="resource-date">February 10, 2025</span>
+          </div>
+          <div class="resource-body">
+            <p class="resource-description">
+              Detailed biomechanical analysis of Olympic lifting techniques.
+              Includes common errors, corrections, and progression strategies
+              for teaching the lifts safely.
+            </p>
+            <div class="resource-meta">
+              <span class="meta-item">🎥 60 min</span>
+              <span class="meta-item">👤 Dr. Alex Martinez</span>
+            </div>
+            <a href="#" class="resource-link">Watch Video →</a>
+          </div>
+        </div>
+
+        <!-- Tool -->
+        <div class="resource-card" data-type="tool">
+          <div class="resource-header">
+            <span class="resource-type">Tool</span>
+            <h3>Injury Risk Dashboard</h3>
+            <span class="resource-date">February 5, 2025</span>
+          </div>
+          <div class="resource-body">
+            <p class="resource-description">
+              Interactive dashboard for tracking and visualizing injury risk
+              factors. Integrates multiple data streams to provide actionable
+              insights for injury prevention.
+            </p>
+            <div class="resource-meta">
+              <span class="meta-item">📊 Excel Tool</span>
+              <span class="meta-item">💾 3.2 MB</span>
+            </div>
+            <a href="#" class="resource-link">Download Tool →</a>
+          </div>
+        </div>
+
+        <!-- Article -->
+        <div class="resource-card" data-type="article">
+          <div class="resource-header">
+            <span class="resource-type">Article</span>
+            <h3>Sleep and Athletic Performance</h3>
+            <span class="resource-date">January 30, 2025</span>
+          </div>
+          <div class="resource-body">
+            <p class="resource-description">
+              Exploring the critical relationship between sleep quality and
+              athletic performance. Includes practical strategies for optimizing
+              sleep in competitive athletes.
+            </p>
+            <div class="resource-meta">
+              <span class="meta-item">📖 18 min read</span>
+              <span class="meta-item">👤 Kelly Williams</span>
+            </div>
+            <a href="#" class="resource-link">Read Article →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="cta-container">
+      <h2>Can't Find What You're Looking For?</h2>
+      <p>
+        We're constantly adding new resources. Let us know what you need
+        and we'll work on creating it for our community.
+      </p>
+      <a href="contact.html" class="cta-button">Request a Resource</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="handbook.html">Handbook</a>
+        <a href="about.html">About</a>
+        <a href="resources.html">Resources</a>
+        <a href="network.html">Network</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-contact">
+        <h3>Get in Touch</h3>
+        <p>
+          <a href="mailto:info@sportsciencenetwork.com">info@sportsciencenetwork.com</a>
+        </p>
+      </div>
+      <p class="copyright">© 2025 Sport Science Network. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile navigation toggle
+    const mobileToggle = document.querySelector('.mobile-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    mobileToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('nav')) {
+        navLinks.classList.remove('active');
+      }
+    });
+
+    // Filter functionality
+    const filterButtons = document.querySelectorAll('.filter-button');
+    const resourceCards = document.querySelectorAll('.resource-card');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Update active button
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        // Filter cards
+        const filterType = button.getAttribute('data-filter');
+        
+        resourceCards.forEach(card => {
+          if (filterType === 'all' || card.getAttribute('data-type') === filterType) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
